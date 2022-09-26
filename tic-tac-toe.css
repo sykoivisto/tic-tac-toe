@@ -84,7 +84,7 @@ header {
 
     cursor: pointer;
 }
-.grid-space {
+.grid-space-wrapper {
     background-color: var(--dark);
 }
 .x {
