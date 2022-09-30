@@ -41,7 +41,9 @@ const player = (name) => {
 }
 
 const gamecontroller = (() => {
-    const renderGrid = () => {
+    let turn = 1; //1 for player x turn, 2 for player o turn
+
+    const renderGrid = () => { //loops thru gameboard.grid and adds x or o class to each grid space in the DOM
         for ( i = 0; i < 9; i++ ) {
             switch (gameboard.getGrid()[i]) {
                 case 0:
@@ -70,8 +72,34 @@ const gamecontroller = (() => {
 
     };
 
+    const advanceTurn = () => {
+        if (turn === 1) {
+            turn = 2;
+        } else {
+            turn = 1;
+        }
+    }
+
+    const click = (e) => {
+        let target = (e.target.attributes.id.value);
+
+        if (gameboard.getGrid()[target] === 0) { //check if the grid space is empty
+            gameboard.setGrid(target, turn);
+            advanceTurn();
+            gamecontroller.renderGrid();
+        }
+    }
+
+    [...document.querySelectorAll('.grid-space')].forEach(function(item) {
+        item.addEventListener('click', click);
+    });
+
     return {
         renderGrid,
         clearGrid
     };
+
+
 })();
+
+gamecontroller.renderGrid();
