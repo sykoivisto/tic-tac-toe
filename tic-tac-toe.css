@@ -93,6 +93,34 @@ header {
 .overlay {
     filter: blur(4px);
     -webkit-filter: blur(4px);
+    pointer-events: none;
+}
+.start-screen {
+    position: absolute;
+    top: 30vh;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    align-items: center;
+}
+.start-screen label {
+    color: var(--light);
+    font-size: 30px;
+}
+.start-screen input {
+    height: 50px;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+    padding: 0px 10px 0px 10px;
+}
+.start-screen > div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 .game-over {
     position: absolute;
@@ -111,8 +139,9 @@ header {
     color: var(--light);
     text-shadow: 0px 0px 4px black;
     font-weight: bold;
+    line-height: 80px;
 }
-.game-over button {
+button {
     width: 150px;
     height: 50px;
     border: none;
@@ -120,7 +149,7 @@ header {
     font-size: 20px;
     box-shadow: 0px 1px 2px;
 }
-.game-over button:hover {
+button:hover {
     cursor: pointer;
     scale: 1.15;
 }
@@ -165,4 +194,9 @@ header {
     height: 100%;
 
     filter: invert(94%) sepia(3%) saturate(1178%) hue-rotate(182deg) brightness(91%) contrast(92%);
+}
+
+
+.hidden {
+    display: none;
 }

@@ -1,8 +1,8 @@
 const gameboard = (() => {
     let grid = [
-        1,0,0,
-        0,1,0,
-        2,0,2
+        0,0,0,
+        0,0,0,
+        0,0,0
     ]; // 0 = empty, 1 = player 1 (x's), 2 = player 2 (o's)
 
     const checkGameState = (val) => {
@@ -48,7 +48,7 @@ const gameboard = (() => {
 
 const player = (name) => {
     const player = name;
-    const score = 0;
+    let score = 0;
 
     const addPoint = () => {
         score++;
@@ -68,6 +68,8 @@ const player = (name) => {
 
 const gamecontroller = (() => {
     let turn = 1; //1 for player x turn, 2 for player o turn
+    let player1;
+    let player2;
 
     const renderGrid = () => { //loops thru gameboard.grid and adds x or o class to each grid space in the DOM
         for ( i = 0; i < 9; i++ ) {
@@ -101,8 +103,10 @@ const gamecontroller = (() => {
     const advanceTurn = () => {//if it's player 1's turn, make it player 2, otherwise, make it player 1 again
         if (turn === 1) {
             turn = 2;
+            document.getElementById('whosTurnUsername').innerHTML = `${player2.getName()}'s (o's)`
         } else {
             turn = 1;
+            document.getElementById('whosTurnUsername').innerHTML = `${player1.getName()}'s (x's)`
         }
     };
 
@@ -128,22 +132,62 @@ const gamecontroller = (() => {
         switch (state) {
             case 1:
                 //handle player 1 win;
-                alert('player 1 wins')
+                player1.addPoint();
+                document.getElementById('playerXScore').innerText = player1.getScore();
+
+                document.getElementById('win-player-name').innerText = player1.getName();
+                document.getElementById('display-wrapper').classList.add('overlay');
+                document.querySelector('.game-over').classList.remove('hidden');
+                document.getElementById('game-over-win').classList.remove('hidden');
                 break;
             case 2:
                 //handle player 2 win
-                alert('player 2 wins')
+                player2.addPoint();
+                document.getElementById('playerOScore').innerText = player2.getScore();
+
+                document.getElementById('win-player-name').innerText = player2.getName();
+                document.getElementById('display-wrapper').classList.add('overlay');
+                document.querySelector('.game-over').classList.remove('hidden');
+                document.getElementById('game-over-win').classList.remove('hidden');
                 break;
             case 3:
                 //handle a tie
-                alert('its a tie')
+                document.getElementById('display-wrapper').classList.add('overlay');
+                document.querySelector('.game-over').classList.remove('hidden');
+                document.getElementById('game-over-tie').classList.remove('hidden');
                 break;
         }
     };
 
+    const startGame = () => {
+        let player1name = document.getElementById('player-1-name-input').value;
+        let player2name = document.getElementById('player-2-name-input').value;
+
+        player1 = player(player1name);
+        player2 = player(player2name);
+
+        document.getElementById('playerXName').innerText = player1.getName();
+        document.getElementById('playerOName').innerText = player2.getName();
+
+        document.getElementById('whosTurnUsername').innerHTML = `${player1.getName()}'s (x's)`
+
+        document.getElementById('display-wrapper').classList.remove('overlay'); //remove the overlay
+        document.querySelector('.start-screen').classList.add('hidden'); //hide the start screen
+    }
+
+    const playAgain = () => {
+        clearGrid();
+        document.getElementById('display-wrapper').classList.remove('overlay');
+        document.querySelector('.game-over').classList.add('hidden');
+        document.getElementById('game-over-win').classList.add('hidden');
+        document.getElementById('game-over-tie').classList.add('hidden');
+    }
+
     return {
         renderGrid,
-        clearGrid
+        clearGrid,
+        startGame,
+        playAgain
     };
 
 

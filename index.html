@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,8 +8,9 @@
     <link rel="stylesheet" href="tic-tac-toe.css">
     <title>Tic-Tac-Toe!</title>
 </head>
+
 <body>
-    <div class="overlay">
+    <div id="display-wrapper" class="overlay">
         <header>tic tac toe</header>
         <div class="scoreboard">
             <div>
@@ -16,7 +18,7 @@
                 <p class="score" id="playerXScore">0</p>
             </div>
             <div class="whosTurn">
-                <p>Robert's</p>
+                <p id="whosTurnUsername">Robert's</p>
                 <p>Turn</p>
             </div>
             <div>
@@ -26,22 +28,53 @@
         </div>
         <div class="gameboard">
             <div class="grid">
-                <div class="grid-space-wrapper"><div class="grid-space" id="0"></div></div>
-                <div class="grid-space-wrapper"><div class="grid-space" id="1"></div></div>
-                <div class="grid-space-wrapper"><div class="grid-space" id="2"></div></div>
-                <div class="grid-space-wrapper"><div class="grid-space" id="3"></div></div>
-                <div class="grid-space-wrapper"><div class="grid-space" id="4"></div></div>
-                <div class="grid-space-wrapper"><div class="grid-space" id="5"></div></div>
-                <div class="grid-space-wrapper"><div class="grid-space" id="6"></div></div>
-                <div class="grid-space-wrapper"><div class="grid-space" id="7"></div></div>
-                <div class="grid-space-wrapper"><div class="grid-space" id="8"></div></div>
+                <div class="grid-space-wrapper">
+                    <div class="grid-space" id="0"></div>
+                </div>
+                <div class="grid-space-wrapper">
+                    <div class="grid-space" id="1"></div>
+                </div>
+                <div class="grid-space-wrapper">
+                    <div class="grid-space" id="2"></div>
+                </div>
+                <div class="grid-space-wrapper">
+                    <div class="grid-space" id="3"></div>
+                </div>
+                <div class="grid-space-wrapper">
+                    <div class="grid-space" id="4"></div>
+                </div>
+                <div class="grid-space-wrapper">
+                    <div class="grid-space" id="5"></div>
+                </div>
+                <div class="grid-space-wrapper">
+                    <div class="grid-space" id="6"></div>
+                </div>
+                <div class="grid-space-wrapper">
+                    <div class="grid-space" id="7"></div>
+                </div>
+                <div class="grid-space-wrapper">
+                    <div class="grid-space" id="8"></div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="game-over">
-        <p id="game-over-message">Congratulations, Bobbert! You Win!</p>
-        <button>New Game</button>
+    <div class="start-screen">
+        <div>
+            <label for="player-1-name-input">Player 1 (x's) Nickname:</label>
+            <input type="text" id="player-1-name-input">
+        </div>
+        <div>
+            <label for="player-2-name-input">Player 2 (o's) Nickname:</label>
+            <input type="text" id="player-2-name-input">
+        </div>
+        <button onclick="gamecontroller.startGame()">Start Game!</button>
+    </div>
+    <div class="game-over hidden">
+        <p id="game-over-tie" class="hidden">It's a Tie!</p>
+        <p id="game-over-win" class="hidden">Congratulations, <span id="win-player-name">Bobbert</span>!<br>You Win!</p>
+        <button onclick="gamecontroller.playAgain()">Play Again</button>
     </div>
     <script src="tic-tac-toe.js"></script>
 </body>
+
 </html>
